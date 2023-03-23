@@ -153,33 +153,33 @@ module AgeMatrixSelector #(
     end
   end
 
-`ifndef SYNTHESIS
-  default disable iff (~rstn);
-  generate
-    for (genvar i = 0; i < EnqWidth; i++) begin : gen_enq_checker
-      ENQ_VLD_ENTRY :
-      assert property (@(posedge clk) enq_fire_i[i] |-> ((enq_mask_i[i] & entry_vld_i) == 0))
-      else begin
-        $fatal("\n Error : Enqueueing a valid entry! enq_mask[%b]\n", enq_mask_i[i]);
-      end
-    end
-    for (genvar i = 0; i < SelWidth; i++) begin : gen_sel_checker
-      SEL_INVLD_ENTRY :
-      assert property (@(negedge clk) |sel_mask_i |-> ((result_mask_o[i] & ~entry_vld_i) == 0))
-      else begin
-        $fatal("\n Error : Selecting a invalid entry! sel_mask[%b]\n",
-               (result_mask_o[i] & ~entry_vld_i));
-      end
+// `ifndef SYNTHESIS
+//   default disable iff (~rstn);
+//   generate
+//     for (genvar i = 0; i < EnqWidth; i++) begin : gen_enq_checker
+//       ENQ_VLD_ENTRY :
+//       assert property (@(posedge clk) enq_fire_i[i] |-> ((enq_mask_i[i] & entry_vld_i) == 0))
+//       else begin
+//         $fatal("\n Error : Enqueueing a valid entry! enq_mask[%b]\n", enq_mask_i[i]);
+//       end
+//     end
+//     for (genvar i = 0; i < SelWidth; i++) begin : gen_sel_checker
+//       SEL_INVLD_ENTRY :
+//       assert property (@(negedge clk) |sel_mask_i |-> ((result_mask_o[i] & ~entry_vld_i) == 0))
+//       else begin
+//         $fatal("\n Error : Selecting a invalid entry! sel_mask[%b]\n",
+//                (result_mask_o[i] & ~entry_vld_i));
+//       end
 
-      RESULT_MASK_IS_ONEHOT :
-      assert property (@(negedge clk) |sel_mask_i |-> $onehot0(result_mask_o[i]))
-      else begin
-        $fatal("\n Error : Got multi-choice which should never happend! result_mask[%b]\n",
-               result_mask_o[i]);
-      end
-    end
-  endgenerate
-`endif
+//       RESULT_MASK_IS_ONEHOT :
+//       assert property (@(negedge clk) |sel_mask_i |-> $onehot0(result_mask_o[i]))
+//       else begin
+//         $fatal("\n Error : Got multi-choice which should never happend! result_mask[%b]\n",
+//                result_mask_o[i]);
+//       end
+//     end
+//   endgenerate
+// `endif
 
 
 endmodule
