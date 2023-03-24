@@ -7,9 +7,9 @@
     "CLOCK_PORT": "clk",
     "FP_SIZING": "absolute",
     "PL_TARGET_DENSITY": "0.7",
-    "DIE_AREA": "0 0 1200 1200",
+    "DIE_AREA": "0 0 1000 1000",
     "CORE_AREA": "250 250 750 750",
-    "FP_IO_MIN_DISTANCE": "0.1",
+    "FP_IO_MIN_DISTANCE": "0.3",
     "PL_RESIZER_DESIGN_OPTIMIZATIONS": "0",
     "PL_RESIZER_TIMING_OPTIMIZATIONS": "0"
 }
