@@ -1,0 +1,119 @@
+{
+    "noc": {
+      "noc_type": "mesh",
+      "node_num_x_dimension": 2,
+      "node_num_y_dimension": 2,
+      "qos_vc_num_per_input": 1,
+      "vc_depth": 4
+    },
+    "chi": {
+      "req_channel_flit_size": 32,
+      "resp_channel_flit_size": 64,
+      "snoop_channel_flit_size": 128,
+      "data_channel_flit_size": 256
+    },
+    "router0": {
+      "place": [0,0],
+      "local_device_num": 2,
+      "device0": {
+        "name": "core",
+        "req_rx": 1,
+        "req_tx": 1,
+        "resp_rx": 1,
+        "resp_tx": 1,
+        "snoop_rx": 1,
+        "snoop_tx": 1,
+        "data_rx": 1,
+        "data_tx": 1        
+      },
+      "device1": {
+        "name": "core",
+        "req_rx": 1,
+        "req_tx": 1,
+        "resp_rx": 1,
+        "resp_tx": 1,
+        "snoop_rx": 1,
+        "snoop_tx": 1,
+        "data_rx": 1,
+        "data_tx": 1        
+      }
+    },
+    "router1": {
+        "place": [1,0],
+        "local_device_num": 2,
+        "device0": {
+          "name": "core",
+          "req_rx": 1,
+          "req_tx": 1,
+          "resp_rx": 1,
+          "resp_tx": 1,
+          "snoop_rx": 1,
+          "snoop_tx": 1,
+          "data_rx": 1,
+          "data_tx": 1        
+        },
+        "device1": {
+          "name": "core",
+          "req_rx": 1,
+          "req_tx": 1,
+          "resp_rx": 1,
+          "resp_tx": 1,
+          "snoop_rx": 1,
+          "snoop_tx": 1,
+          "data_rx": 1,
+          "data_tx": 1        
+        }
+    },
+    "router2": {
+        "place": [0,1],
+        "local_device_num": 1,
+        "device0": {
+          "name": "core",
+          "req_rx": 1,
+          "req_tx": 1,
+          "resp_rx": 1,
+          "resp_tx": 1,
+          "snoop_rx": 1,
+          "snoop_tx": 1,
+          "data_rx": 1,
+          "data_tx": 1        
+        }
+    },
+    "router3": {
+        "place": [1,1],
+        "local_device_num": 3,
+        "device0": {
+          "name": "core",
+          "req_rx": 1,
+          "req_tx": 1,
+          "resp_rx": 1,
+          "resp_tx": 1,
+          "snoop_rx": 1,
+          "snoop_tx": 1,
+          "data_rx": 1,
+          "data_tx": 1        
+        },
+        "device1": {
+          "name": "core",
+          "req_rx": 1,
+          "req_tx": 1,
+          "resp_rx": 1,
+          "resp_tx": 1,
+          "snoop_rx": 1,
+          "snoop_tx": 1,
+          "data_rx": 1,
+          "data_tx": 1        
+        },
+        "device2": {
+          "name": "ddr",
+          "req_rx": 1,
+          "req_tx": 1,
+          "resp_rx": 1,
+          "resp_tx": 1,
+          "snoop_rx": 1,
+          "snoop_tx": 1,
+          "data_rx": 1,
+          "data_tx": 1        
+        }
+    }
+  }
