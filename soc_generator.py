@@ -3,7 +3,7 @@ import os
  
 if __name__ == '__main__':
 
-    with open('noc_config.json','r') as j:
+    with open('soc_config.json','r') as j:
         config = json.load(j)
     noc_type = config['noc']['noc_type']
     node_num_x_dimension = config['noc']['node_num_x_dimension']
@@ -378,7 +378,7 @@ if __name__ == '__main__':
 
 
 
-    file = 'noc_top.sv'
+    file = 'soc_top.sv'
     with open(file,'w') as f:
         for i in range(len(parameter_print_list)):
             f.write(parameter_print_list[i] + '\n')
