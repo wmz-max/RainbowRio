@@ -42,9 +42,9 @@ if __name__ == '__main__':
     parameter_print_list.append('localparam type flit_payload_t_chi_resp_channel' + ' = ' + 'logic[' + str(resp_channel_flit_size) + '-1:0];')
     parameter_print_list.append('localparam type flit_payload_t_chi_snoop_channel' + ' = ' + 'logic[' + str(snoop_channel_flit_size) + '-1:0];')
     parameter_print_list.append('localparam type flit_payload_t_chi_data_channel' + ' = ' + 'logic[' + str(data_channel_flit_size) + '-1:0];')
-    parameter_print_list.append('VC_ID_NUM_MAX_W = ' + str(vc_depth) +';')
-    parameter_print_list.append('NodeID_X_Width = ' + str(node_num_x_dimension))
-    parameter_print_list.append('NodeID_Y_Width = ' + str(node_num_y_dimension))
+    parameter_print_list.append('localparam VC_ID_NUM_MAX_W = ' + str(vc_depth) +';')
+    parameter_print_list.append('localparam NodeID_X_Width = ' + str(node_num_x_dimension))
+    parameter_print_list.append('localparam NodeID_Y_Width = ' + str(node_num_y_dimension))
     node_num = 0
 
 
