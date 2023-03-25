@@ -1,10 +1,10 @@
 import json
-
+import os
  
 if __name__ == '__main__':
 
-    with open('noc_config.json','r') as f:
-        config = json.load(f)
+    with open('noc_config.json','r') as j:
+        config = json.load(j)
     noc_type = config['noc']['noc_type']
     node_num_x_dimension = config['noc']['node_num_x_dimension']
     node_num_y_dimension = config['noc']['node_num_y_dimension']
@@ -249,75 +249,6 @@ if __name__ == '__main__':
                 device_print_list.append(');')
                 
             router_num += 1
-    # device_print_list = []
-    # router_num = 0
-    # for i in range(int(node_num_x_dimension)):
-    #     for j in range(int(node_num_y_dimension)):
-    #         router_local_device_num = config['router' + str(router_num)]['local_device_num']
-    #         for k in range(router_local_device_num):
-    #             local_device_name = config['router' + str(router_num)]['device' + str(k) + '_name']
-    #             device_print_list.append(str(local_device_name) + ' ' + 'router_' + str(str(i) + '_' + str(j) + '_device_' + str(k) +  '('))
-    #             device_print_list.append('.rx_flit_pend_chi_req_channel_i               ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_req_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_flit_v_chi_req_channel_i                  ' + '(tx_flit_v_' + str(i) + '_' + str(j) + '_chi_req_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_flit_chi_req_channel_i                    ' + '(tx_flit_' + str(i) + '_' + str(j) + '_chi_req_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_flit_vc_id_chi_req_channel_i              ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_req_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_flit_look_ahead_routing_chi_req_channel_i ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_req_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_pend_chi_req_channel_o               ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_req_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_v_chi_req_channel_o                  ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_req_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_chi_req_channel_o                    ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_req_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_vc_id_chi_req_channel_o              ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_req_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_look_ahead_routing_chi_req_channel_o ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_req_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_lcrd_v_chi_req_channel_o                  ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_req_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_lcrd_id_chi_req_channel_o                 ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_req_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_lcrd_v_chi_req_channel_i                  ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_req_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_lcrd_id_chi_req_channel_i                 ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_req_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('')
-    #             device_print_list.append('.rx_flit_pend_chi_resp_channel_i               ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_resp_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_flit_v_chi_resp_channel_i                  ' + '(tx_flit_v_' + str(i) + '_' + str(j) + '_chi_resp_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_flit_chi_resp_channel_i                    ' + '(tx_flit_' + str(i) + '_' + str(j) + '_chi_resp_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_flit_vc_id_chi_resp_channel_i              ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_resp_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_flit_look_ahead_routing_chi_resp_channel_i ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_resp_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_pend_chi_resp_channel_o               ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_resp_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_v_chi_resp_channel_o                  ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_resp_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_chi_resp_channel_o                    ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_resp_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_vc_id_chi_resp_channel_o              ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_resp_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_look_ahead_routing_chi_resp_channel_o ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_resp_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_lcrd_v_chi_resp_channel_o                  ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_resp_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_lcrd_id_chi_resp_channel_o                 ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_resp_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_lcrd_v_chi_resp_channel_i                  ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_resp_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_lcrd_id_chi_resp_channel_i                 ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_resp_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('')
-    #             device_print_list.append('.rx_flit_pend_chi_snoop_channel_i               ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_snoop_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_flit_v_chi_snoop_channel_i                  ' + '(tx_flit_v_' + str(i) + '_' + str(j) + '_chi_snoop_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_flit_chi_snoop_channel_i                    ' + '(tx_flit_' + str(i) + '_' + str(j) + '_chi_snoop_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_flit_vc_id_chi_snoop_channel_i              ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_snoop_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_flit_look_ahead_routing_chi_snoop_channel_i ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_snoop_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_pend_chi_snoop_channel_o               ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_snoop_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_v_chi_snoop_channel_o                  ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_snoop_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_chi_snoop_channel_o                    ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_snoop_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_vc_id_chi_snoop_channel_o              ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_snoop_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_look_ahead_routing_chi_snoop_channel_o ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_snoop_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_lcrd_v_chi_snoop_channel_o                  ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_snoop_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_lcrd_id_chi_snoop_channel_o                 ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_snoop_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_lcrd_v_chi_snoop_channel_i                  ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_snoop_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_lcrd_id_chi_snoop_channel_i                 ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_snoop_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('')
-    #             device_print_list.append('.rx_flit_pend_chi_data_channel_i               ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_data_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_flit_v_chi_data_channel_i                  ' + '(tx_flit_v_' + str(i) + '_' + str(j) + '_chi_data_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_flit_chi_data_channel_i                    ' + '(tx_flit_' + str(i) + '_' + str(j) + '_chi_data_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_flit_vc_id_chi_data_channel_i              ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_data_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_flit_look_ahead_routing_chi_data_channel_i ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_data_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_pend_chi_data_channel_o               ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_data_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_v_chi_data_channel_o                  ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_data_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_chi_data_channel_o                    ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_data_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_vc_id_chi_data_channel_o              ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_data_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_flit_look_ahead_routing_chi_data_channel_o ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_data_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_lcrd_v_chi_data_channel_o                  ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_data_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.rx_lcrd_id_chi_data_channel_o                 ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_data_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_lcrd_v_chi_data_channel_i                  ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_data_channel' + '[' + str(k + 4) + ']),')
-    #             device_print_list.append('.tx_lcrd_id_chi_data_channel_i                 ' + '(tx_flit_pend_' + str(i) + '_' + str(j) + '_chi_data_channel' + '[' + str(k + 4) + '])')
-    #             device_print_list.append(');')
-    #         router_num += 1
 
 
     router_generator_print_list = []
@@ -463,6 +394,23 @@ if __name__ == '__main__':
         f.write('\n')
         for i in range(len(line_generator_print_list)):
             f.write(line_generator_print_list[i] + '\n')
+
+    control={'DESIGN_NAME': config['eda']['DESIGN_NAME'],
+             'VERILOG_FILES': config['eda']['VERILOG_FILES'],
+             'DESIGN_IS_CORE': config['eda']['DESIGN_IS_CORE'],
+             'ROUTING_CORES': config['eda']['ROUTING_CORES'],
+             'CLOCK_PERIOD': config['eda']['CLOCK_PERIOD'],
+             'CLOCK_PORT': config['eda']['CLOCK_PORT'],
+             'FP_SIZING': config['eda']['FP_SIZING'],
+             'PL_TARGET_DENSITY': config['eda']['PL_TARGET_DENSITY'],
+             'DIE_AREA': config['eda']['DIE_AREA'],
+             'CORE_AREA': config['eda']['CORE_AREA'],
+             'FP_IO_MIN_DISTANCE': config['eda']['FP_IO_MIN_DISTANCE'],
+             'PL_RESIZER_DESIGN_OPTIMIZATIONS': config['eda']['PL_RESIZER_DESIGN_OPTIMIZATIONS'],
+             'PL_RESIZER_TIMING_OPTIMIZATIONS': config['eda']['PL_RESIZER_TIMING_OPTIMIZATIONS']}
+    
+    with open('eda.json','w') as f:
+        json.dump(control,f,indent='\n')
         
             
 
