@@ -16,13 +16,13 @@
       "place": [0,0],
       "local_device_num": 2,
       "device0": {
-        "name": "core",
-        "req_rx": 1,
+        "name": "perips_top",
+        "req_rx": 0,
         "req_tx": 1,
         "resp_rx": 1,
-        "resp_tx": 1,
-        "snoop_rx": 1,
-        "snoop_tx": 1,
+        "resp_tx": 0,
+        "snoop_rx": 0,
+        "snoop_tx": 0,
         "data_rx": 1,
         "data_tx": 1        
       },
@@ -68,7 +68,7 @@
         "place": [0,1],
         "local_device_num": 1,
         "device0": {
-          "name": "core",
+          "name": "perips",
           "req_rx": 1,
           "req_tx": 1,
           "resp_rx": 1,
@@ -116,6 +116,38 @@
           "data_tx": 1        
         }
     },
+    "perips": {
+      "core_num": 5,
+      "clock_domain_num": 5,
+      "global_clock": 50000000,
+      "domain1": 50000000,
+      "domain2": 50000000,
+      "domain3": 50000000,
+      "domain4": 50000000,
+      "spi": {
+        "clock_domain": 1,
+        "device_num": 1
+      },
+      "i2c": {
+        "clock_domain": 3,
+        "device_num": 1
+      },
+      "uart": {
+        "clock_domain": 2,
+        "device_num": 3,
+        "frequency": 50000000
+      },
+      "gpio": {
+        "clock_domain": 3,
+        "io_size": 2,
+        "device_num": 1
+      },
+      "testio": 1,
+      "crg": {
+
+      }
+    },
+
     "eda" : {
       "DESIGN_NAME": "tb_mesh",
       "VERILOG_FILES":   "dir::tb_mesh.v",

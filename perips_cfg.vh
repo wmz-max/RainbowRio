@@ -1,0 +1,13 @@
+`define TESTIO
+
+localparam DEFAULT_FRENQUENCY = 50000000
+localparam PERIPS_SIZE = 6
+localparam WB_AD_WIDTH 43
+localparam WB_DAT_WIDTH 32
+localparam UART_CLK_FREQ 50000000
+localparam CORE_NUM 5
+localparam FREQUENCY1 = 50000000
+localparam FREQUENCY2 = 50000000
+localparam FREQUENCY3 = 50000000
+localparam FREQUENCY4 = 50000000
+

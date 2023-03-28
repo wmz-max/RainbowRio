@@ -1,8 +1,10 @@
 import json
 import os
- 
+from perips_generator import gen_perips_top
+
 if __name__ == '__main__':
 
+    gen_perips_top()
     with open('soc_config.json','r') as j:
         config = json.load(j)
     noc_type = config['noc']['noc_type']
@@ -100,6 +102,12 @@ if __name__ == '__main__':
             for k in range(router_local_device_num):
                 local_device_name = config['router' + str(router_num)]['device' + str(k)]['name']
                 device_print_list.append(str(local_device_name) + ' ' + 'router_' + str(i) + '_' + str(j) + '_device_' + str(k) +  '(') 
+                if(local_device_name == "perips_top"):
+                    parameter_print_list.append('logic [' + '-1:0] perips_core_ei_o;')
+                    device_print_list.append('.uart_rx_i(uart_rx_i),\n.uart_tx_o(uart_tx_o),\n.gpio_in_i(gpio_in_i),\n.gpio_out_o(gpio_out_o),\n\
+.gpio_out_enable_o(gpio_out_enable_o),\n.scl_i(scl_i),\n.scl_o(scl_o),\n.scl_oen_o(scl_oen_o),\n.sda_i(sda_i),\n.sda_o(sda_o),\n.sda_oen_o(sda_oen_o),\n\
+.spi_sck_o(spi_sck_o),\n.spi_cs_o(spi_cs_o),\n.spi_mod_o(spi_mod_o),\n.spi_dat_o(spi_dat_o),\n.spi_dat_i(spi_dat_i)')
+
                 if config['router' + str(router_num)]['device' + str(k)]['req_rx'] == 1 :
                     parameter_print_list.append('logic ' + 'router_' + str(i) + '_' + str(j) + '_device_' + str(k) + '_' + channel_name[0] + '_valid_o;')
                     parameter_print_list.append('logic ' + 'router_' + str(i) + '_' + str(j) + '_device_' + str(k) + '_' + channel_name[0] + '_ready_i;')

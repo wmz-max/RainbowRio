@@ -13,23 +13,62 @@ module crg(
     input wbm_crg_we_i,
     output [WB_DAT_WIDTH-1:0] crg_wbm_rdata_o,
     output crg_wbm_ack_o,
-    // hehe, cache, clint, plic
     output domain1_clk_o,
-    output domain1_rst_o,
-    //uart
     output domain2_clk_o,
-    output domain2_rst_o,
-    //gpio
     output domain3_clk_o,
-    output domain3_rst_o,
-    //ebi
     output domain4_clk_o,
-    output domain4_rst_o
+    output uart_rst_o,
+    output i2c_rst_o,
+    output gpio_rst_o,
+    output spi_rst_o
 );
+
+localparam CLK1_MAX = DEFAULT_FRENQUENCY / FREQUENCY1;
+localparam CLK2_MAX = DEFAULT_FRENQUENCY / FREQUENCY2;
+localparam CLK3_MAX = DEFAULT_FRENQUENCY / FREQUENCY3;
+localparam CLK4_MAX = DEFAULT_FRENQUENCY / FREQUENCY4;
+reg clk1_div, clk2_div, clk3_div, clk4_div;
+reg [$clog2(CLK1_MAX)-1:0] clk1_count;
+reg [$clog2(CLK2_MAX)-1:0] clk2_count;
+reg [$clog2(CLK3_MAX)-1:0] clk3_count;
+reg [$clog2(CLK4_MAX)-1:0] clk4_count;
+
+always_ff @(posedge clk) begin
+    if(rst) begin
+        clk1_div <= 1'b0;
+        clk2_div <= 1'b0;
+        clk3_div <= 1'b0;
+        clk4_div <= 1'b0;
+        clk1_count <= 'b0;
+        clk2_count <= 'b0;
+        clk3_count <= 'b0;
+        clk4_count <= 'b0;
+    end else begin
+        if(clk1_count == CLK1_MAX - 1'b1) begin
+            clk1_div <= ~clk1_div;
+            clk1_count <= 1'b0;
+        end
+        if(clk2_count == CLK2_MAX - 1'b1) begin
+            clk2_div <= ~clk2_div;
+            clk2_count <= 1'b0;
+        end
+        if(clk3_count == CLK3_MAX - 1'b1) begin
+            clk3_div <= ~clk3_div;
+            clk3_count <= 1'b0;
+        end
+        if(clk4_count == CLK4_MAX - 1'b1) begin
+            clk4_div <= ~clk4_div;
+            clk4_count <= 1'b0;
+        end
+    end
+end
+
 `define VERIFY_SOC
 `ifdef VERIFY_SOC
 /* verilator lint_off LATCH */
 /* verilator lint_off UNOPTFLAT */
+
+
 reg domain1_clk_en, domain2_clk_en, domain3_clk_en, domain4_clk_en;
 reg clk1_latch, clk2_latch, clk3_latch, clk4_latch;
 always @(*) begin  //use latch to remove glitch
@@ -40,10 +79,13 @@ always @(*) begin  //use latch to remove glitch
     clk4_latch = domain4_clk_en;
     end
 end
-assign domain1_clk_o = global_clk & clk1_latch;
-assign domain2_clk_o = global_clk & clk2_latch;
-assign domain3_clk_o = global_clk & clk3_latch;
-assign domain4_clk_o = global_clk & clk4_latch;
+
+assign domain1_clk_o = clk1_div & clk1_latch;
+assign domain2_clk_o = clk2_div & clk2_latch;
+assign domain3_clk_o = clk3_div & clk3_latch;
+assign domain4_clk_o = clk4_div & clk4_latch;
+
+
 
 `else
 
