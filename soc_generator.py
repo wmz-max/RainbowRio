@@ -24,7 +24,6 @@ if __name__ == '__main__':
 
 
 
-
     router_list = []
     for i in range(int(node_num_x_dimension * node_num_y_dimension)):
         router_list.append(config['router'+str(i)]['local_device_num'])
@@ -47,6 +46,15 @@ if __name__ == '__main__':
     parameter_print_list.append('localparam VC_ID_NUM_MAX_W = ' + str(vc_depth) +';')
     parameter_print_list.append('localparam NodeID_X_Width = ' + str(node_num_x_dimension))
     parameter_print_list.append('localparam NodeID_Y_Width = ' + str(node_num_y_dimension))
+
+    for i in range(0, config['perips']['core_num']):
+        parameter_print_list.append('`define CORE_' + str(hex(i)) + '_MTIMECMP_ADDR 32\'h0200_0' + str(hex(i)) + '00')
+        parameter_print_list.append('`define CORE_' + str(hex(i)) + '_MTIME_ADDR 32\'h0200_0' + str(hex(i)) + '01')
+        parameter_print_list.append('`define CORE_' + str(hex(i)) + '_MSIP_ADDR 32\'h0200_0' + str(hex(i)) + '02')
+        parameter_print_list.append('`define CORE_' + str(hex(i)) + '_STIMECMP_ADDR 32\'h0200_0' + str(hex(i)) + '03')
+        parameter_print_list.append('`define CORE_' + str(hex(i)) + '_STIME_ADDR 32\'h0200_0' + str(hex(i)) + '04')
+        parameter_print_list.append('`define CORE_' + str(hex(i)) + '_SSIP_ADDR 32\'h0200_0' + str(hex(i)) + '04')
+        
     node_num = 0
 
 

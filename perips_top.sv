@@ -18,24 +18,24 @@ input flit_payload_t_chi_data_channel chi_data_channel_flit_i,
 input [3-1:0] uart_rx_i,
 output [3-1:0] uart_tx_o,
 
-input [1-1:0][`GPIO_SIZE-1:0] gpio_in_i,
-output [1-1:0][`GPIO_SIZE-1:0] gpio_out_o,
-output [1-1:0][`GPIO_SIZE-1:0] gpio_out_enable_o,
+input [4-1:0][`GPIO_SIZE-1:0] gpio_in_i,
+output [4-1:0][`GPIO_SIZE-1:0] gpio_out_o,
+output [4-1:0][`GPIO_SIZE-1:0] gpio_out_enable_o,
 
-input [1-1:0] scl_i,
-output [1-1:0] scl_o,
-output [1-1:0] scl_oen_o,
-input [1-1:0] sda_i,
-output [1-1:0] sda_o,
-output [1-1:0] sda_oen_o,
+input [3-1:0] scl_i,
+output [3-1:0] scl_o,
+output [3-1:0] scl_oen_o,
+input [3-1:0] sda_i,
+output [3-1:0] sda_o,
+output [3-1:0] sda_oen_o,
 
-output [1-1:0] spi_sck_o,
-output [1-1:0] spi_cs_o,
-output [1-1:0] spi_mod_o
-output [1-1:0] spi_dat_o,
-input [1-1:0] spi_dat_i,
+output [2-1:0] spi_sck_o,
+output [2-1:0] spi_cs_o,
+output [2-1:0] spi_mod_o
+output [2-1:0] spi_dat_o,
+input [2-1:0] spi_dat_i,
 
-output [6-1:0] perips_core_ei_o
+output [12-1:0] perips_core_ei_o
 );
 
 logic [PERIPS_SIZE:0] wbm_slave_cyc, wbm_slave_stb, wbm_slave_ack, wbm_slave_we;
@@ -55,35 +55,35 @@ logic [3-1:0] [WB_DAT_WIDTH-1:0]uart_wdata;
 logic [3-1:0] [(WB_DAT_WIDTH/8)-1:0]uart_sel;
 logic [3-1:0] [WB_AD_WIDTH-1:0]uart_addr;
 
-logic [1-1:0]gpio_cyc;
-logic [1-1:0]gpio_stb;
-logic [1-1:0]gpio_we;
-logic [1-1:0]gpio_ack;
-logic [1-1:0]gpio_irq;
-logic [1-1:0] [WB_DAT_WIDTH-1:0]gpio_rdata;
-logic [1-1:0] [WB_DAT_WIDTH-1:0]gpio_wdata;
-logic [1-1:0] [(WB_DAT_WIDTH/8)-1:0]gpio_sel;
-logic [1-1:0] [WB_AD_WIDTH-1:0]gpio_addr;
+logic [4-1:0]gpio_cyc;
+logic [4-1:0]gpio_stb;
+logic [4-1:0]gpio_we;
+logic [4-1:0]gpio_ack;
+logic [4-1:0]gpio_irq;
+logic [4-1:0] [WB_DAT_WIDTH-1:0]gpio_rdata;
+logic [4-1:0] [WB_DAT_WIDTH-1:0]gpio_wdata;
+logic [4-1:0] [(WB_DAT_WIDTH/8)-1:0]gpio_sel;
+logic [4-1:0] [WB_AD_WIDTH-1:0]gpio_addr;
 
-logic [1-1:0]i2c_cyc;
-logic [1-1:0]i2c_stb;
-logic [1-1:0]i2c_we;
-logic [1-1:0]i2c_ack;
-logic [1-1:0]i2c_irq;
-logic [1-1:0] [WB_DAT_WIDTH-1:0]i2c_rdata;
-logic [1-1:0] [WB_DAT_WIDTH-1:0]i2c_wdata;
-logic [1-1:0] [(WB_DAT_WIDTH/8)-1:0]i2c_sel;
-logic [1-1:0] [WB_AD_WIDTH-1:0]i2c_addr;
+logic [3-1:0]i2c_cyc;
+logic [3-1:0]i2c_stb;
+logic [3-1:0]i2c_we;
+logic [3-1:0]i2c_ack;
+logic [3-1:0]i2c_irq;
+logic [3-1:0] [WB_DAT_WIDTH-1:0]i2c_rdata;
+logic [3-1:0] [WB_DAT_WIDTH-1:0]i2c_wdata;
+logic [3-1:0] [(WB_DAT_WIDTH/8)-1:0]i2c_sel;
+logic [3-1:0] [WB_AD_WIDTH-1:0]i2c_addr;
 
-logic [1-1:0]spi_cyc;
-logic [1-1:0]spi_stb;
-logic [1-1:0]spi_we;
-logic [1-1:0]spi_ack;
-logic [1-1:0]spi_irq;
-logic [1-1:0] [WB_DAT_WIDTH-1:0]spi_rdata;
-logic [1-1:0] [WB_DAT_WIDTH-1:0]spi_wdata;
-logic [1-1:0] [(WB_DAT_WIDTH/8)-1:0]spi_sel;
-logic [1-1:0] [WB_AD_WIDTH-1:0]spi_addr;
+logic [2-1:0]spi_cyc;
+logic [2-1:0]spi_stb;
+logic [2-1:0]spi_we;
+logic [2-1:0]spi_ack;
+logic [2-1:0]spi_irq;
+logic [2-1:0] [WB_DAT_WIDTH-1:0]spi_rdata;
+logic [2-1:0] [WB_DAT_WIDTH-1:0]spi_wdata;
+logic [2-1:0] [(WB_DAT_WIDTH/8)-1:0]spi_sel;
+logic [2-1:0] [WB_AD_WIDTH-1:0]spi_addr;
 
 logic chip_wbs_cyc;
 logic chip_wbs_stb;
@@ -159,7 +159,7 @@ end
 endgenerate
 
 generate
-for(genvar i = 0; i < 1; i++) begin
+for(genvar i = 0; i < 4; i++) begin
 gpio gpio_u(
 .clk(clk_d3),
 .rst(gpio_rst)
@@ -180,7 +180,7 @@ end
 endgenerate
 
 generate
-for(genvar i = 0; i < 1; i++) begin
+for(genvar i = 0; i < 3; i++) begin
 i2cm_top i2c_u(
 .clk(clk_d3),
 .rst(~i2c_rst)
@@ -205,7 +205,7 @@ end
 endgenerate
 
 generate
-for(genvar i = 0; i < 1; i++) begin
+for(genvar i = 0; i < 2; i++) begin
 wbqspiflash spi_u(
 .clk(clk_d1),
 .rst(spi_rst)
@@ -320,25 +320,85 @@ assign wbm_slave_ack[4] = gpio_ack[0];
 assign wbm_slave_rdata[4] = gpio_rdata[0];
 assign perips_core_ei_o[3] = gpio_irq[0];
 
-assign i2c_cyc[0] = wbm_slave_cyc[5];
-assign i2c_stb[0] = wbm_slave_stb[5];
-assign i2c_addr[0] = wbm_slave_addr[5];
-assign i2c_wdata[0] = wbm_slave_wdata[5];
-assign i2c_sel[0] = wbm_slave_sel[5];
-assign i2c_we[0] = wbm_slave_we[5];
-assign wbm_slave_ack[5] = i2c_ack[0];
-assign wbm_slave_rdata[5] = i2c_rdata[0];
-assign perips_core_ei_o[4] = i2c_irq[0];
+assign gpio_cyc[1] = wbm_slave_cyc[5];
+assign gpio_stb[1] = wbm_slave_stb[5];
+assign gpio_addr[1] = wbm_slave_addr[5];
+assign gpio_wdata[1] = wbm_slave_wdata[5];
+assign gpio_sel[1] = wbm_slave_sel[5];
+assign gpio_we[1] = wbm_slave_we[5];
+assign wbm_slave_ack[5] = gpio_ack[1];
+assign wbm_slave_rdata[5] = gpio_rdata[1];
+assign perips_core_ei_o[4] = gpio_irq[1];
 
-assign spi_cyc[0] = wbm_slave_cyc[6];
-assign spi_stb[0] = wbm_slave_stb[6];
-assign spi_addr[0] = wbm_slave_addr[6];
-assign spi_wdata[0] = wbm_slave_wdata[6];
-assign spi_sel[0] = wbm_slave_sel[6];
-assign spi_we[0] = wbm_slave_we[6];
-assign wbm_slave_ack[6] = spi_ack[0];
-assign wbm_slave_rdata[6] = spi_rdata[0];
-assign perips_core_ei_o[5] = spi_irq[0];
+assign gpio_cyc[2] = wbm_slave_cyc[6];
+assign gpio_stb[2] = wbm_slave_stb[6];
+assign gpio_addr[2] = wbm_slave_addr[6];
+assign gpio_wdata[2] = wbm_slave_wdata[6];
+assign gpio_sel[2] = wbm_slave_sel[6];
+assign gpio_we[2] = wbm_slave_we[6];
+assign wbm_slave_ack[6] = gpio_ack[2];
+assign wbm_slave_rdata[6] = gpio_rdata[2];
+assign perips_core_ei_o[5] = gpio_irq[2];
+
+assign gpio_cyc[3] = wbm_slave_cyc[7];
+assign gpio_stb[3] = wbm_slave_stb[7];
+assign gpio_addr[3] = wbm_slave_addr[7];
+assign gpio_wdata[3] = wbm_slave_wdata[7];
+assign gpio_sel[3] = wbm_slave_sel[7];
+assign gpio_we[3] = wbm_slave_we[7];
+assign wbm_slave_ack[7] = gpio_ack[3];
+assign wbm_slave_rdata[7] = gpio_rdata[3];
+assign perips_core_ei_o[6] = gpio_irq[3];
+
+assign i2c_cyc[0] = wbm_slave_cyc[8];
+assign i2c_stb[0] = wbm_slave_stb[8];
+assign i2c_addr[0] = wbm_slave_addr[8];
+assign i2c_wdata[0] = wbm_slave_wdata[8];
+assign i2c_sel[0] = wbm_slave_sel[8];
+assign i2c_we[0] = wbm_slave_we[8];
+assign wbm_slave_ack[8] = i2c_ack[0];
+assign wbm_slave_rdata[8] = i2c_rdata[0];
+assign perips_core_ei_o[7] = i2c_irq[0];
+
+assign i2c_cyc[1] = wbm_slave_cyc[9];
+assign i2c_stb[1] = wbm_slave_stb[9];
+assign i2c_addr[1] = wbm_slave_addr[9];
+assign i2c_wdata[1] = wbm_slave_wdata[9];
+assign i2c_sel[1] = wbm_slave_sel[9];
+assign i2c_we[1] = wbm_slave_we[9];
+assign wbm_slave_ack[9] = i2c_ack[1];
+assign wbm_slave_rdata[9] = i2c_rdata[1];
+assign perips_core_ei_o[8] = i2c_irq[1];
+
+assign i2c_cyc[2] = wbm_slave_cyc[10];
+assign i2c_stb[2] = wbm_slave_stb[10];
+assign i2c_addr[2] = wbm_slave_addr[10];
+assign i2c_wdata[2] = wbm_slave_wdata[10];
+assign i2c_sel[2] = wbm_slave_sel[10];
+assign i2c_we[2] = wbm_slave_we[10];
+assign wbm_slave_ack[10] = i2c_ack[2];
+assign wbm_slave_rdata[10] = i2c_rdata[2];
+assign perips_core_ei_o[9] = i2c_irq[2];
+
+assign spi_cyc[0] = wbm_slave_cyc[11];
+assign spi_stb[0] = wbm_slave_stb[11];
+assign spi_addr[0] = wbm_slave_addr[11];
+assign spi_wdata[0] = wbm_slave_wdata[11];
+assign spi_sel[0] = wbm_slave_sel[11];
+assign spi_we[0] = wbm_slave_we[11];
+assign wbm_slave_ack[11] = spi_ack[0];
+assign wbm_slave_rdata[11] = spi_rdata[0];
+assign perips_core_ei_o[10] = spi_irq[0];
+
+assign spi_cyc[1] = wbm_slave_cyc[12];
+assign spi_stb[1] = wbm_slave_stb[12];
+assign spi_addr[1] = wbm_slave_addr[12];
+assign spi_wdata[1] = wbm_slave_wdata[12];
+assign spi_sel[1] = wbm_slave_sel[12];
+assign spi_we[1] = wbm_slave_we[12];
+assign wbm_slave_ack[12] = spi_ack[1];
+assign wbm_slave_rdata[12] = spi_rdata[1];
+assign perips_core_ei_o[11] = spi_irq[1];
 
 assign wbm_crg_cyc = wbm_slave_cyc[0];
 assign wbm_crg_stb = wbm_slave_stb[0];

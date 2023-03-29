@@ -16,6 +16,53 @@ def gen_perips_top():
     if (config['perips']['testio']):
         macro_print_list.append('`define TESTIO\n')
     
+    id_count = 0
+    if(device_list['uart']>0):
+        for i in range(0, device_list['uart']):
+            macro_print_list.append('`define UART_' + str(hex(i))[-1] + '_TX_DATA_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '00')
+            macro_print_list.append('`define UART_' + str(hex(i))[-1] + '_RX_DATA_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '01')
+            macro_print_list.append('`define UART_' + str(hex(i))[-1] + '_TX_CTRL_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '02')
+            macro_print_list.append('`define UART_' + str(hex(i))[-1] + '_TX_CTRL_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '03')
+            macro_print_list.append('`define UART_' + str(hex(i))[-1] + '_IRQ_PRIO_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '04')
+            macro_print_list.append('`define UART_' + str(hex(i))[-1] + '_IRQ_EN_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '05')
+            macro_print_list.append('`define UART_' + str(hex(i))[-1] + '_IRQ_IP_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '06')
+            
+            id_count = id_count + 1
+    if(device_list['gpio']>0):
+        macro_print_list.append('`define GPIO_SIZE ' + str(config['perips']['gpio']['io_size']))
+        for i in range(0, device_list['gpio']):
+            macro_print_list.append('`define GPIO_' + str(hex(i))[-1] + '_VALUE_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '00')
+            macro_print_list.append('`define GPIO_' + str(hex(i))[-1] + '_INPUT_EN_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '01')
+            macro_print_list.append('`define GPIO_' + str(hex(i))[-1] + '_TX_OUTPUT_EN_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '02')
+            macro_print_list.append('`define GPIO_' + str(hex(i))[-1] + '_TX_PORT_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '03')
+            macro_print_list.append('`define GPIO_' + str(hex(i))[-1] + '_IRQ_PRIO_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '04')
+            macro_print_list.append('`define GPIO_' + str(hex(i))[-1] + '_IRQ_EN_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '05')
+            macro_print_list.append('`define GPIO_' + str(hex(i))[-1] + '_IRQ_IP_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '06')
+            id_count = id_count + 1
+    if(device_list['i2c']>0):
+        for i in range(0, device_list['i2c']):
+            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_CMD_NOP_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '00')
+            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_CMD_START_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '01')
+            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_CMD_STOP_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '02')
+            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_CMD_WRITE_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '03')
+            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_CMD_READ_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '04')
+            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_IRQ_PRIO_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '05')
+            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_IRQ_EN_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '06')
+            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_IRQ_IP_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '07')
+            id_count = id_count + 1
+    if(device_list['spi']>0):
+        for i in range(0, device_list['spi']):
+            macro_print_list.append('`define SPI_' + str(hex(i))[-1] + '_CFG_DATA_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '00')
+            macro_print_list.append('`define SPI_' + str(hex(i))[-1] + '_IRQ_PRIO_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '01')
+            macro_print_list.append('`define SPI_' + str(hex(i))[-1] + '_IRQ_EN_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '02')
+            macro_print_list.append('`define SPI_' + str(hex(i))[-1] + '_IRQ_IP_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '03')
+            id_count = id_count + 1
+            
+    for i in range(0, config['perips']['core_num']):
+        macro_print_list.append('`define CORE_' + str(i) + '_IRQ_TRSHD_ADDR 32\'h0300_0' + str(hex(i))[-1] + '00')
+        macro_print_list.append('`define CORE_' + str(i) + '_IRQ_RESP_ADDR 32\'h0300_0' + str(hex(i))[-1] + '01')
+        macro_print_list.append('`define CORE_' + str(i) + '_IRQ_COMP_ADDR 32\'h0300_0' + str(hex(i))[-1] + '02')
+
     parameter_print_list = []
     parameter_print_list.append('localparam DEFAULT_FRENQUENCY = ' + str(config['perips']['global_clock']))
     parameter_print_list.append('localparam PERIPS_SIZE = ' + str(sum(device_list.values())))
@@ -26,6 +73,7 @@ def gen_perips_top():
     parameter_print_list.append('localparam FREQUENCY2 = ' + str(config['perips']['domain2']))
     parameter_print_list.append('localparam FREQUENCY3 = ' + str(config['perips']['domain3']))
     parameter_print_list.append('localparam FREQUENCY4 = ' + str(config['perips']['domain4']))
+
 
     if_print_list = []
     if_print_list.append('`include \'perips_cfg.vh\'\nmodule perips_top(\ninput clk,\ninput rst,\n\
