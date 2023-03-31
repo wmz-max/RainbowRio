@@ -33,19 +33,18 @@ def gen_perips_top():
         for i in range(0, device_list['gpio']):
             macro_print_list.append('`define GPIO_' + str(hex(i))[-1] + '_VALUE_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '00')
             macro_print_list.append('`define GPIO_' + str(hex(i))[-1] + '_INPUT_EN_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '01')
-            macro_print_list.append('`define GPIO_' + str(hex(i))[-1] + '_TX_OUTPUT_EN_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '02')
-            macro_print_list.append('`define GPIO_' + str(hex(i))[-1] + '_TX_PORT_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '03')
+            macro_print_list.append('`define GPIO_' + str(hex(i))[-1] + '_PORT_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '03')
             macro_print_list.append('`define GPIO_' + str(hex(i))[-1] + '_IRQ_PRIO_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '04')
             macro_print_list.append('`define GPIO_' + str(hex(i))[-1] + '_IRQ_EN_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '05')
             macro_print_list.append('`define GPIO_' + str(hex(i))[-1] + '_IRQ_IP_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '06')
             id_count = id_count + 1
     if(device_list['i2c']>0):
         for i in range(0, device_list['i2c']):
-            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_CMD_NOP_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '00')
-            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_CMD_START_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '01')
-            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_CMD_STOP_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '02')
-            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_CMD_WRITE_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '03')
-            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_CMD_READ_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '04')
+            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_CTR_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '00')
+            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_TX_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '01')
+            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_RX_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '02')
+            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_CR_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '03')
+            macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_SR_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '04')
             macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_IRQ_PRIO_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '05')
             macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_IRQ_EN_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '06')
             macro_print_list.append('`define I2C_' + str(hex(i))[-1] + '_IRQ_IP_ADDR 32\'h0200_0' + str(hex(id_count))[-1] + '07')

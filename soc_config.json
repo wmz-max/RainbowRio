@@ -142,10 +142,7 @@
         "io_size": 2,
         "device_num": 4
       },
-      "testio": 1,
-      "crg": {
-
-      }
+      "testio": 1
     },
 
     "eda" : {

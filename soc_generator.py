@@ -48,12 +48,12 @@ if __name__ == '__main__':
     parameter_print_list.append('localparam NodeID_Y_Width = ' + str(node_num_y_dimension))
 
     for i in range(0, config['perips']['core_num']):
-        parameter_print_list.append('`define CORE_' + str(hex(i)) + '_MTIMECMP_ADDR 32\'h0200_0' + str(hex(i)) + '00')
-        parameter_print_list.append('`define CORE_' + str(hex(i)) + '_MTIME_ADDR 32\'h0200_0' + str(hex(i)) + '01')
-        parameter_print_list.append('`define CORE_' + str(hex(i)) + '_MSIP_ADDR 32\'h0200_0' + str(hex(i)) + '02')
-        parameter_print_list.append('`define CORE_' + str(hex(i)) + '_STIMECMP_ADDR 32\'h0200_0' + str(hex(i)) + '03')
-        parameter_print_list.append('`define CORE_' + str(hex(i)) + '_STIME_ADDR 32\'h0200_0' + str(hex(i)) + '04')
-        parameter_print_list.append('`define CORE_' + str(hex(i)) + '_SSIP_ADDR 32\'h0200_0' + str(hex(i)) + '04')
+        parameter_print_list.append('`define CORE_' + str(hex(i))[-1] + '_MTIMECMP_ADDR 32\'h0300_0' + str(hex(i))[-1] + '00')
+        parameter_print_list.append('`define CORE_' + str(hex(i))[-1] + '_MTIME_ADDR 32\'h0300_0' + str(hex(i))[-1] + '01')
+        parameter_print_list.append('`define CORE_' + str(hex(i))[-1] + '_MSIP_ADDR 32\'h0300_0' + str(hex(i))[-1] + '02')
+        parameter_print_list.append('`define CORE_' + str(hex(i))[-1] + '_STIMECMP_ADDR 32\'h0300_0' + str(hex(i))[-1] + '03')
+        parameter_print_list.append('`define CORE_' + str(hex(i))[-1] + '_STIME_ADDR 32\'h0300_0' + str(hex(i))[-1] + '04')
+        parameter_print_list.append('`define CORE_' + str(hex(i))[-1] + '_SSIP_ADDR 32\'h0300_0' + str(hex(i))[-1] + '05')
         
     node_num = 0
 
